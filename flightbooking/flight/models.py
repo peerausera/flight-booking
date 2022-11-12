@@ -1,10 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class Data(models.Model):
-    key = models.CharField(max_length=10,primary_key=True)
-    value = models.CharField(max_length=100)
-
 
 class Customer(models.Model):
     username = models.CharField(max_length=100, primary_key=True)
@@ -43,7 +39,8 @@ class Flight(models.Model):
 
 class Ticket(models.Model):
     Ticket_id  = models.CharField(max_length=10,primary_key=True)
-    flightclass = models.ForeignKey(Flightclass, on_delete=models.CASCADE, db_column='flight_class')
+    flightid  =  models.ForeignKey(Flight, on_delete=models.CASCADE, db_column='flight_id')
+    flight_class = models.ForeignKey(Flight, on_delete=models.CASCADE, db_column='flightclass')
     buy_time = models.DateTimeField(null=True)
     seat = models.CharField(max_length=10)
     count_ticket_left = models.IntegerField(null=True)
