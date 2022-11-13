@@ -22,30 +22,4 @@ class Flightclass(models.Model):
     def __str__(self):
         return self.flight_class
 
-class Flight(models.Model):
-    flight_id  = models.CharField(max_length=10,primary_key=True)
-    departure = models.CharField(max_length=100)
-    destination = models.CharField(max_length=10)
-    gate = models.CharField(max_length=10)
-    boarding_time = models.TimeField(null=True)
-    boarding_date = models.DateField(null=True)
-    flightclass = models.ForeignKey(Flightclass, on_delete=models.CASCADE, db_column='flight_class')
-    flightprice = models.ForeignKey(Flightclass, on_delete=models.CASCADE, db_column='price')
-    class Meta:
-        db_table = "flight"
-        managed = False
-    def __str__(self):
-        return self.flight_id
 
-class Ticket(models.Model):
-    Ticket_id  = models.CharField(max_length=10,primary_key=True)
-    flightid  =  models.ForeignKey(Flight, on_delete=models.CASCADE, db_column='flight_id')
-    flight_class = models.ForeignKey(Flight, on_delete=models.CASCADE, db_column='flightclass')
-    buy_time = models.DateTimeField(null=True)
-    seat = models.CharField(max_length=10)
-    count_ticket_left = models.IntegerField(null=True)
-    class Meta:
-        db_table = "flight"
-        managed = False
-    def __str__(self):
-        return self.flight_id
