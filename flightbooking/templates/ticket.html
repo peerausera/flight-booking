@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/ticket_script.js' %}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/ticket_style.css' %}">
+
+</head>
+
+<body>
+    <div id="contentToPrint">
+        <div class="container">
+            <div class="ticket basic"><i class="fa fa-barcode" aria-hidden="true"> </i>
+                <div class="text">
+                    <p>Passenger Name</p>
+                    <h1 id="name"> JOHN DOE</h1>
+                    <p>Class</p>
+                    <h1 id="flight_class">Economy</h1>
+                    <div class="seat">
+                        <p>Seat</p>
+                        <h1 id="seat">11E</h1>
+                    </div>
+                    <div class="flight">
+                        <p>Flight</p>
+                        <h1 id="flight_id">2005</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket airline">
+                <div class="item1">
+                    <div class="from">
+                        <p>from</p>
+                        <h1 id="departure">BWI</h1>
+                    </div><i class="fa fa-plane"></i>
+                    <div class="to">
+                        <p>to</p>
+                        <h1 id="destination">SAN</h1>
+                    </div>
+                </div>
+                <div class="item2">
+                    <div class="gate">
+                        <p>Gate</p>
+                        <h1 id="gate">B3</h1>
+                    </div>
+                    <div class="time">
+                        <p>Boarding Time</p>
+                        <h1 id="b_time">10:25AM</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

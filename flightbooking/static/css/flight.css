@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #eee;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  h1 {
+    width: 65%;
+    color: #666;
+    margin: 40px auto 0;
+  }
+  
+  div.card {
+    background-color: #fff;
+    width: 65%;
+    color: #666;
+    padding: 20px;
+    margin: 20px auto;
+  }
+  
+  div.card:hover {
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
+  }
+  
+  div.view_selected {
+    width: 65%;
+    color: #999;
+    font-size: 85%;
+    padding: 0 5px;
+    margin: -15px auto;
+  }
+  
+  div.view_selected span {
+    font-size: 125%;
+  }
+  
+  h2 {
+    margin: 0 0 0 50px;
+  }
+  
+  div.card p {
+    margin: 5px 0 0 50px;
+  }
+  
+  hr {
+    margin: 20px 100px 20px 10px;
+    border: 1px solid #eee;
+  }
+  
+  a.check {
+    display: block;
+    float: left;
+    color: #eee;
+    text-decoration: none;
+    padding: 5px;
+    margin: -20px;
+    border: 1px solid #fff;
+  }
+
+  
+  
+  a.button {
+    display: block;
+    float: right;
+    color: #FF4B2B;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 7px 12px;
+    margin-top: 5px;
+    border: 1px solid #FF4B2B;
+    border-radius: 4px;
+  }
+
+  a.button:hover {
+    background-color: #FF4B2B;
+    color: #fff;
+  }
+
+  .fa-plane {
+    position: absolute;
+    transform: scale(5, 5) rotate(45deg);
+    font-size: 160%;
+    top: 35%;
+    left: 65%;
+  }

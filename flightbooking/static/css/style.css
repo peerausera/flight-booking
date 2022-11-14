@@ -436,6 +436,7 @@ h1, h2, h3, h4, h5, h6, figure {
   transform: scale(1.2);
 }
 
+
 .gtco-cover {
   height: 1000px;
   background-size: cover;
@@ -502,7 +503,7 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 .gtco-cover.gtco-cover-xs {
-  height: 500px;
+  height: 250px;
 }
 @media screen and (max-width: 768px) {
   .gtco-cover.gtco-cover-xs {
@@ -733,7 +734,7 @@ form label {
 #gtco-subscribe,
 #gtco-footer,
 .gtco-section {
-  padding: 7em 0;
+  padding: 3em 0;
   clear: both;
   position: relative;
 }
@@ -866,14 +867,14 @@ form label {
 }
 
 .gtco-heading {
-  margin-bottom: 5em;
+  margin-bottom: 1em;
 }
 .gtco-heading.gtco-heading-sm {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 .gtco-heading h2 {
-  font-size: 50px;
-  margin-bottom: 10px;
+  font-size: 35px;
+  margin-bottom: 5px;
   line-height: 1.5;
   font-weight: 300;
   color: #000;
@@ -1889,3 +1890,4 @@ form label {
 }
 
 /*# sourceMappingURL=style.css.map */
+
