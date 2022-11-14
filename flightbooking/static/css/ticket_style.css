@@ -101,3 +101,12 @@ p {
 .time {
   float: right;
 }
+
+.warning{
+  font-size: 4.5em;
+  margin: auto;
+  padding: 3em;
+  text-align: center;
+  text-transform: uppercase;
+  color: red;
+}
