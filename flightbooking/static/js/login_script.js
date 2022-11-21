@@ -66,8 +66,7 @@ $(document).ready(function () {
 				} else {            
 					var username = $('#username').val().trim();
 					var strLink = "/flight/?username=" + username;
-					// document.getElementById("btnsignup").setAttribute("href",strLink);
-					window.location.href = strLink
+					window.location.href = strLink;
 
 				}
 			},
@@ -106,7 +105,7 @@ $(document).ready(function () {
 					alert('รหัสผ่านไม่ถูกต้อง');
 				} else {            
 					var strLink = "/flight/?username=" + user;
-					window.location.href = strLink
+					window.location.href = strLink;
 				}
 			},
 		});

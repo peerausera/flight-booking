@@ -16,13 +16,11 @@ import re
 # Create your views here.
 
 def index(request):
-    data = {}
-    return render(request, 'index.html', data)
+    return render(request, 'index.html')
 
 
 def login(request):
-    data = {}
-    return render(request, 'login.html', data)
+    return render(request, 'login.html')
 
 
 
@@ -89,10 +87,10 @@ class CustomerDetail(View):
             print(data)
         return JsonResponse(data)
 
-class TicketForm(forms.ModelForm):
-    class Meta:
-        model = Ticket
-        fields = '__all__'
+# class TicketForm(forms.ModelForm):
+#     class Meta:
+#         model = Ticket
+#         fields = '__all__'
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -114,16 +112,28 @@ class CustomersSignup(View):
             return JsonResponse(data)
 
 
-
+var1 = None
+var2 = None
 @method_decorator(csrf_exempt, name='dispatch')
 class SearchTicket(View):
     
     @transaction.atomic
     def post(self, request):
-        form = TicketForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            data = dict()
-            data['result'] = form.errors
-            return JsonResponse(data)
+        # print(request.POST)
+        destination = request.POST['destination']
+        date_start = request.POST['date_start']
+        global var1,var2
+        def var1():
+            return destination
+        def var2():
+            return date_start
+        # print(date_start)
+        # print(destination)
+        # form = TicketForm(request.POST)
+        # if form.is_valid():
+        #     form.save()
+        # else:
+        #     data = dict()
+        #     data['result'] = form.errors
+        data ={}
+        return JsonResponse(data)
