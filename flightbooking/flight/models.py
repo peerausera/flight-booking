@@ -6,6 +6,7 @@ class Customer(models.Model):
     username = models.CharField(max_length=100, primary_key=True)
     password = models.CharField(max_length=20, null=True)
     firstname = models.CharField(max_length=100, null=True)
+    lastname = models.CharField(max_length=100, null=True)
     birthday = models.DateField(null=True)
     phonenumber = models.CharField(max_length=10, null=True)
     class Meta:
@@ -39,9 +40,11 @@ class Ticket(models.Model):
     ticket_id  = models.CharField(max_length=10,primary_key=True)
     flightid  =  models.ForeignKey(Flight, on_delete=models.CASCADE, db_column='flight_id')
     flight_class = models.ForeignKey(Flightclass, on_delete=models.CASCADE, db_column='flight_class')
+    username = models.ForeignKey(Customer, on_delete=models.CASCADE, db_column='username')
     seat = models.CharField(max_length=10)
+    date = models.DateField(null=True)
     class Meta:
-        db_table = "flight"
+        db_table = "ticket"
         managed = False
     def __str__(self):
         return self.ticket_id

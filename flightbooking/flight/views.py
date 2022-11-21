@@ -14,53 +14,116 @@ import re
 
 
 # Create your views here.
-    
+
 def index(request):
     data = {}
     return render(request, 'index.html', data)
+
 
 def login(request):
     data = {}
     return render(request, 'login.html', data)
 
-def Customer(request):
-    
-    dataReport = dict()
-    data = list(Customer.objects.all().values())
-    columns = ("username", "password", "firstname", "birthday", "phonenumber")
-    dataReport['column_name'] = columns
-    dataReport['data'] = data
 
-    return render(request, 'report_list_all_customer.html', dataReport)
 
-def Flightclass(request):
-    
-    dataReport = dict()
-    data = list(Flightclass.objects.all().values())
-    columns = ("flight_class", "price")
-    dataReport['column_name'] = columns
-    dataReport['data'] = data
+def Flightview(request):
 
-    return render(request, 'report_list_all_Flightclass.html', dataReport)
-
-def Flight(request):
-    
-    dataReport = dict()
+    # dataReport = dict()
 #    data = list(Flight.objects.all().values())
 #    columns = ("flight_id","departure","destination","gate","boarding_time","boarding_date","flightclass","flightprice")
 #    dataReport['column_name'] = columns
 #    dataReport['data'] = data
+    username = request.GET.get('username', '')
+    ticket = list(Ticket.objects.filter(username=username)
+    .values('ticket_id','flightid','flight_class','username','seat','flightid__departure','flightid__destination','flightid__gate','flightid__boarding_time'))
+    data = dict()
+    data['ticket'] = ticket
+    # print(data)
+    return render(request, 'flight.html', data)
 
-    return render(request, 'flight.html', dataReport)
 
-def Ticket(request):
+# def Ticket(request):
+
+#     ticket = list(Ticket.objects.all().values())
+#     data = dict()
+#     data['customers'] = ticket
+
+#     return render(request, 'ticket.html', data)
+def ticket(request):
+    username = request.GET.get('username', '')
+    ticket = list(Ticket.objects.filter(username=username)
+    .values('ticket_id','flightid','flight_class','username','seat','flightid__departure','flightid__destination','flightid__gate','flightid__boarding_time'))
+    data = dict()
+    data['ticket'] = ticket
+    # print(data)
+    return render(request, 'ticket.html', data)
+
+# class getticket(View):
+#     def post(self, request):
+        
+#         username = request.GET.get('username', '')
+#         ticket = list(Ticket.objects.filter(username=username)
+#         .values('ticket_id','flightid','flight_class','username','seat','flightid__departure','flightid__destination','flightid__gate','flightid__boarding_time'))
+#         data = dict()
+#         data['ticket'] = ticket
+#         print(data)
+#         return render(request, 'ticket.html', data)
+
+# class Ticketview(View):
+#     def get(self, request):
+#         ticket = list(Ticket.objects.all().values())
+#         data = dict()
+#         data['ticket'] = ticket
+
+#         return render(request, 'ticket.html', data)
+
+class CustomerDetail(View):
+    def get(self, request,username):
+        customer = list(Customer.objects.filter(username=username).values('username','password'))
+        if customer == []:
+            data = dict()
+            data['error'] = "Error!"
+        else:
+            data = dict()
+            data['customer'] = customer
+            print(data)
+        return JsonResponse(data)
+
+class TicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = '__all__'
+
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CustomersSignup(View):
     
-    dataReport = dict()
-#    data = list(Ticket.objects.all().values())
-#    columns = ("Ticket_id", "flightclass", "buy_time", "seat", "count_ticket_left")
-#    dataReport['column_name'] = columns
-#    dataReport['data'] = data
+    @transaction.atomic
+    def post(self, request):
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            data = dict()
+            data['result'] = form.errors
+            return JsonResponse(data)
 
-    return render(request, 'ticket.html', dataReport)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class SearchTicket(View):
+    
+    @transaction.atomic
+    def post(self, request):
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            data = dict()
+            data['result'] = form.errors
+            return JsonResponse(data)

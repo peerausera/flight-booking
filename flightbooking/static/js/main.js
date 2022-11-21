@@ -302,4 +302,40 @@
 	});
 
 
+	$('#btn-submit').click(function () {
+		var date = $('#date-start').val().trim();
+		if (date == '') {
+			alert('กรุณาระบุวันที่');
+			$('#date-start').focus();
+			return false;
+		}                  
+		// var token = $('[name=csrfmiddlewaretoken]').val();
+		//         $.ajax({
+		//             url:  '/search',
+		//             type:  'post',
+		//             data: $('#form_customer').serialize(),
+		//             headers: { "X-CSRFToken": token },
+		//             dataType:  'json',
+		//             success: function  (data) {
+		//                 let rows =  '';
+		//                 var i = 1;
+		//                 data.customers.forEach(customer => {
+		//                     rows += `
+		//                     <tr>
+		//                         <td>${i++}</td>
+		//                         <td>${customer.customer_code}</td>
+		//                         <td>${customer.name}</td>
+		//                         <td>${customer.address}</td>
+		//                         <td>${customer.credit_limit}</td>
+		//                         <td>${customer.country}</td>
+		//                         <td><input type='button' class='btnDelCustomer' value='Del'></td>
+		//                     </tr>`;
+		//                 });
+		//                 $('#CustomerList > tbody').html(rows);
+		//             },
+		//         });   
+			
+	});
+
 }());
+

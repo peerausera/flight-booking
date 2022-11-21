@@ -21,9 +21,12 @@ from flight import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('index', views.index, name='index'),
-    path('login', views.login),
-    path('flight', views.Flight),
-    path('ticket', views.Ticket),
+    path('index/', views.index, name='index'),
+    path('login/', views.login),
+    path('login/signup/', views.CustomersSignup.as_view(), name='customersignup'),
+    path('login/user/<username>', views.CustomerDetail.as_view(), name='loginuser'),
+    path('flight/', views.Flightview),
+    path('ticket/', views.ticket),
+    path('ticket/search/', views.SearchTicket.as_view(), name='searchticket'),
     
 ]

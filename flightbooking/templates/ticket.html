@@ -4,7 +4,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/ticket_script.js' %}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/ticket_style.css' %}">
@@ -12,21 +11,23 @@
 </head>
 
 <body>
+
     <h1 class="warning">กรุณาจับภาพหน้าจอนี้ไว้เพื่อเป็นหลักฐานในการขึ้นเครื่องบิน</h1>
+    {% for list in ticket %}
         <div class="container">
             <div class="ticket basic"><i class="fa fa-barcode" aria-hidden="true"> </i>
                 <div class="text">
                     <p>Passenger Name</p>
-                    <h1 id="name"> JOHN DOE</h1>
+                    <h3 id="name"> {{ list.username }}</h3>
                     <p>Class</p>
-                    <h1 id="flight_class">Economy</h1>
+                    <h3 id="flight_class">{{ list.flight_class }}</h3>
                     <div class="seat">
                         <p>Seat</p>
-                        <h1 id="seat">11E</h1>
+                        <h1 id="seat">{{ list.seat }}</h1>
                     </div>
                     <div class="flight">
                         <p>Flight</p>
-                        <h1 id="flight_id">2005</h1>
+                        <h1 id="flight_id">{{ list.flightid }}</h1>
                     </div>
                 </div>
             </div>
@@ -34,27 +35,28 @@
                 <div class="item1">
                     <div class="from">
                         <p>from</p>
-                        <h1 id="departure">BWI</h1>
+                        <h2 id="departure">{{ list.flightid__departure }}</h2>
                     </div><i class="fa fa-plane"></i>
                     <div class="to">
                         <p>to</p>
-                        <h1 id="destination">SAN</h1>
+                        <h2 id="destination">{{ list.flightid__destination }}</h2>
                     </div>
                 </div>
                 <div class="item2">
                     <div class="gate">
                         <p>Gate</p>
-                        <h1 id="gate">B3</h1>
+                        <h1 id="gate">{{ list.flightid__gate }}</h1>
                     </div>
                     <div class="time">
                         <p>Boarding Time</p>
-                        <h1 id="b_time">10:25AM</h1>
+                        <h1 id="b_time">{{ list.flightid__boarding_time }}</h1>
                     </div>
                 </div>
             </div>
         </div>
-
-
+        {% endfor %}
+        
+        
 </body>
 
 </html>
