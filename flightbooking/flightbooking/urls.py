@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/signup/', views.CustomersSignup.as_view(), name='customersignup'),
     path('login/user/<username>', views.CustomerDetail.as_view(), name='loginuser'),
     path('flight/', views.Flightview),
+    path('flight/createticket/', views.CreateTicket.as_view(), name='createticket'),
     path('ticket/', views.ticket),
     path('ticket/search/', views.SearchTicket.as_view(), name='searchticket'),
     

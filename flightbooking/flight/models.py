@@ -18,7 +18,7 @@ class Flightclass(models.Model):
     flight_class = models.CharField(max_length=50,primary_key=True)
     price = models.FloatField(null=True, blank=True)
     class Meta:
-        db_table = "flight_class"
+        db_table = "flightclass"
         managed = False
     def __str__(self):
         return self.flight_class
@@ -42,7 +42,6 @@ class Ticket(models.Model):
     flight_class = models.ForeignKey(Flightclass, on_delete=models.CASCADE, db_column='flight_class')
     username = models.ForeignKey(Customer, on_delete=models.CASCADE, db_column='username')
     seat = models.CharField(max_length=10)
-    date = models.DateField(null=True)
     class Meta:
         db_table = "ticket"
         managed = False

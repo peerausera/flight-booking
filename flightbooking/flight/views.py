@@ -11,6 +11,7 @@ from django.db import transaction
 from .models import *
 import json
 import re
+import random
 
 
 # Create your views here.
@@ -23,57 +24,33 @@ def login(request):
     return render(request, 'login.html')
 
 
-
+var3 =None
 def Flightview(request):
-
-    # dataReport = dict()
-#    data = list(Flight.objects.all().values())
-#    columns = ("flight_id","departure","destination","gate","boarding_time","boarding_date","flightclass","flightprice")
-#    dataReport['column_name'] = columns
-#    dataReport['data'] = data
     username = request.GET.get('username', '')
-    ticket = list(Ticket.objects.filter(username=username)
-    .values('ticket_id','flightid','flight_class','username','seat','flightid__departure','flightid__destination','flightid__gate','flightid__boarding_time'))
+    global var3
+    def var3():
+        return username
+    destination = var1()
+    date_start= var2()
+    boarding_date = reFormatDateMMDDYYYY(date_start)
+    flight = list(Flight.objects.filter(destination = destination)
+    .filter(boarding_date = boarding_date)
+    .values('flight_id','departure','gate','boarding_time','boarding_date'))
+    flight_class = list(Flightclass.objects.all().values().order_by('price'))
     data = dict()
-    data['ticket'] = ticket
-    # print(data)
+    data['flight'] = flight
+    data['flight_class'] = flight_class
+    data['destination'] = destination
     return render(request, 'flight.html', data)
 
-
-# def Ticket(request):
-
-#     ticket = list(Ticket.objects.all().values())
-#     data = dict()
-#     data['customers'] = ticket
-
-#     return render(request, 'ticket.html', data)
 def ticket(request):
-    username = request.GET.get('username', '')
-    ticket = list(Ticket.objects.filter(username=username)
+    ticket_id = request.GET.get('ticket_id', '')
+    ticket = list(Ticket.objects.filter(ticket_id=ticket_id)
     .values('ticket_id','flightid','flight_class','username','seat','flightid__departure','flightid__destination','flightid__gate','flightid__boarding_time'))
     data = dict()
     data['ticket'] = ticket
-    # print(data)
     return render(request, 'ticket.html', data)
 
-# class getticket(View):
-#     def post(self, request):
-        
-#         username = request.GET.get('username', '')
-#         ticket = list(Ticket.objects.filter(username=username)
-#         .values('ticket_id','flightid','flight_class','username','seat','flightid__departure','flightid__destination','flightid__gate','flightid__boarding_time'))
-#         data = dict()
-#         data['ticket'] = ticket
-#         print(data)
-#         return render(request, 'ticket.html', data)
-
-# class Ticketview(View):
-#     def get(self, request):
-#         ticket = list(Ticket.objects.all().values())
-#         data = dict()
-#         data['ticket'] = ticket
-
-#         return render(request, 'ticket.html', data)
 
 class CustomerDetail(View):
     def get(self, request,username):
@@ -84,13 +61,12 @@ class CustomerDetail(View):
         else:
             data = dict()
             data['customer'] = customer
-            print(data)
         return JsonResponse(data)
 
-# class TicketForm(forms.ModelForm):
-#     class Meta:
-#         model = Ticket
-#         fields = '__all__'
+class TicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = '__all__'
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -119,21 +95,51 @@ class SearchTicket(View):
     
     @transaction.atomic
     def post(self, request):
-        # print(request.POST)
         destination = request.POST['destination']
         date_start = request.POST['date_start']
-        global var1,var2
+        global var1
+        global var2
         def var1():
             return destination
         def var2():
             return date_start
-        # print(date_start)
-        # print(destination)
-        # form = TicketForm(request.POST)
-        # if form.is_valid():
-        #     form.save()
-        # else:
-        #     data = dict()
-        #     data['result'] = form.errors
         data ={}
         return JsonResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CreateTicket(View):
+    
+    @transaction.atomic
+    def post(self, request):
+        if Ticket.objects.count() != 0:        
+            ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']    
+            ticket_id_temp = [re.findall(r'(\w+?)(\d+)', ticket_id_max)[0]][0]                
+            next_ticket_id = ticket_id_temp[0] + str(int(ticket_id_temp[1])+1)        
+        else:
+            next_ticket_id = 'TK100000'
+        print(next_ticket_id)
+        user=var3() 
+        Flightid = request.POST.get('flightid')
+        Flightclass = request.POST.get('flight_class')
+        dict_data = dict()
+        dict_data['flightid'] = Flightid
+        dict_data['flight_class'] = Flightclass
+        dict_data['ticket_id'] = next_ticket_id
+        dict_data['username'] = user
+        dict_data['seat'] = random.randint(1, 200)
+        
+        data = dict()
+        form = TicketForm(dict_data)
+        if form.is_valid():
+
+            form.save()
+            data['ticket_id'] = next_ticket_id
+        else:
+            data['error'] = "Error!"
+        return JsonResponse(data)
+
+
+def reFormatDateMMDDYYYY(yyyymmdd):
+        if (yyyymmdd == ''):
+            return ''
+        return  yyyymmdd[6:] + "-" + yyyymmdd[:2] + "-" + yyyymmdd[3:5]

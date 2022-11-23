@@ -102,39 +102,31 @@
                 <div class="gtco-container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-                            <h2 id="fdestination">เที่ยวบินไปกรุงเทพ</h2>
+                            <h2 id="fdestination">เที่ยวบินไป {{ destination }}</h2>
                         </div>
                     </div>
+                    {% for list in flight %}
+                    {% for list1 in flight_class %}
                     <div class="row">
                         <div class="card">
                             <i class="fa fa-plane"></i>
-                            <h2>AA 1234</h2>
-                            <p>Depart: 12/12/2012 - 8:30 pm</p>
-                            <p>First Class</p>
-                            <p>ราคา 50000</p>
-                            <a id="btn-select" class="button">เลือกเที่ยวบิน</a>
+                            <h2 >{{ list.flight_id }}</h2>
+                            <input type="hidden" id="flightid" name="variable" value="{{ list.flight_id }}">
+                            <p>วันเดินทาง: {{ list.boarding_date }} - {{ list.boarding_time }}</p>
+                            <p >{{ list1.flight_class }}</p>
+                            <input type="hidden" id="flightclass" name="variable" value="{{ list1.flight_class }}">
+                            <p>ราคา {{ list1.price }}</p>
+                            <a id="btn-select" class="button" onclick="button()">เลือกเที่ยวบิน</a>
                             <hr>
                         </div>
-
-                        <div class="card">
-                            <i class="fa fa-plane"></i>
-                            <h2>AA 1234</h2>
-                            <p>Depart: 12/12/2012 - 8:30 pm</p>
-                            <a href="#" class="button">เลือกเที่ยวบิน</a>
-                            <hr>
-                        </div>
-
-                        <div class="card">
-                            <i class="fa fa-plane"></i>
-                            <h2>AA 1234</h2>
-                            <p>Depart: 12/12/2012 - 8:30 pm</p>
-                            <a href="#" class="button">เลือกเที่ยวบิน</a>
-                            <hr>
-                        </div>
-
+                    
+                        
+                        
                         
 
                     </div>
+                    {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
 
@@ -142,12 +134,10 @@
 
         </div>
 
-        <div class="gototop js-top">
-            <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-        </div>
+        
 
         <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
         <!-- jQuery Easing -->
         <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
         <!-- Bootstrap -->
@@ -171,8 +161,9 @@
 
 
         <!-- Main -->
-        <script src="{% static 'js/main.js' %}"></script>
         <script src="{% static 'js/flight.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        
 
 
     </body>
