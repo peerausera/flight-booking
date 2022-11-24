@@ -29,5 +29,13 @@ urlpatterns = [
     path('flight/createticket/', views.CreateTicket.as_view(), name='createticket'),
     path('ticket/', views.ticket),
     path('ticket/search/', views.SearchTicket.as_view(), name='searchticket'),
+    path('ReportListAllTicket',views.ReportListAllTicket),
+    path('ReportListAllCustomer',views.ReportListAllCustomer),
+    path('FlightManagement', views.FMindex, name='FMindex'),
+    # path('FlightManagement/list', views.InvoiceList.as_view(), name='invoice_list'),
+    # path('FlightManagement/detail/<str:pk>/<str:pk2>', views.InvoiceDetail.as_view(), name='invoice_detail'),
+    # path('FlightManagement/create', views.InvoiceCreate.as_view(), name='invoice_create'),
+    # path('FlightManagement/update', views.InvoiceUpdate.as_view(), name='invoice_update'),
+    # path('FlightManagement/delete', views.InvoiceDelete.as_view(), name='invoice_delete'),
     
 ]

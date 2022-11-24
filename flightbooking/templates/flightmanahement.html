@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png"> -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cpe.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.css">
+    <link rel="stylesheet" href="{% static 'css/glyphicon.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+    <script src="{% static 'js/flightmanahement.js' %}"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav mb-0 ">
+            <li class="nav-item">
+                <a class="nav-link" href="/FlightManagement">Flight Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ReportListAllTicket">Report List All Ticket</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ReportListAllCustomer">Report List All Customer</a>
+            </li>
+        </ul>
+    </nav>
+    <div style="font-size:0;" class="bg-light p-2">
+        <input type='image' id='btnNew' src="{% static 'images/newOn.png' %}" alt="newOn" width="60" height="60">
+        <input type='image' id='btnEdit' src="{% static 'images/editOn.png' %}" alt="editOn" width="60" height="60">
+        <input type='image' id='btnSave' src="{% static 'images/saveOn.png' %}" alt="saveOn" width="60" height="60">
+        <input type='image' id='btnDelete' src="{% static 'images/deleteOn.png' %}" alt="deleteOn" width="60"
+            height="60">
+    </div>
+    <br />
+    <form id='form_flight' action='/'>
+        {% csrf_token %}
+        <div class="container-fluid">
+            <div class='form-row align-items-center'>
+                <div class="col-lg-4 col-md-8 col-12 col-auto">
+                    <div class='input-group mb-2'>
+                        <div class='input-group-prepend'>
+                            <div class='input-group-text'>Flight ID :</div>
+                        </div>
+                        <input type='text' id='txt_Flight_ID' name='Flight ID' class='form-control'>
+                    </div>
+                </div>
+                <div class="col-0 col-lg-1"></div>
+                <div class="col-lg-4 col-md-8 col-12 col-auto">
+                    <div class='input-group mb-2'>
+                        <div class='input-group-prepend'>
+                            <div class='input-group-text'>Gate :</div>
+                        </div>
+                        <input type='text' id='txt_Gate' name='Gate' class='form-control'>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class='form-row div-1'>
+                <div class="col-lg-4 col-md-8 col-12 col-auto">
+                    <div class='input-group mb-2'>
+                        <div class='input-group-prepend'>
+                            <div class='input-group-text'>Departure :</div>
+                        </div>
+                        <input type='text' id='txt_Departure' name='Departure' class='form-control'>
+                    </div>
+                </div>
+                <div class="col-0 col-lg-1"></div>
+                <div class="col-lg-4 col-md-8 col-12 col-auto">
+                    <div class='input-group mb-2'>
+                        <div class='input-group-prepend'>
+                            <div class='input-group-text'>Destination :</div>
+                        </div>
+                        <input type='text' id='txt_Destination' name='Destination' class='form-control'>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class='form-row div-2'>
+                <div class="col-lg-4 col-md-8 col-12 col-auto">
+                    <div class='input-group mb-2'>
+                        <div class='input-group-prepend'>
+                            <div class='input-group-text'>Boarding Date :</div>
+                        </div>
+                        <input type='text' id='txt_BoardingDate' name='date' class='form-control' required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Check this checkbox to continue.</div>
+                        <button type='button' class="btn btn-default" id='btn_BoardingDate'>
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-0 col-lg-1"></div>
+                <div class="col-lg-4 col-md-8 col-12 col-auto">
+                    <div class='input-group mb-2  '>
+                        <div class='input-group-prepend'>
+                            <div class='input-group-text'>Boarding Time :</div>
+                        </div>
+                        <input type='text' id='txt_BoardingTime' name='time' class='form-control' required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Check this checkbox to continue.</div>
+                        <button type='button' class="btn btn-default" id='btn_BoardingTime'>
+                            <span class="glyphicon glyphicon-time"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br />
+    </form>
+
+
+
+</body>
+
+</html>

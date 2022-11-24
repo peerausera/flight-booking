@@ -88,7 +88,6 @@ $(document).ready(function () {
 			$('#pwd').focus();
 			return false;
 		}
-		
 		$.ajax({
 			url: '/login/user/' + user,
 			type: 'get',
@@ -103,9 +102,15 @@ $(document).ready(function () {
 				} 
 				else if (pwd != pass){
 					alert('รหัสผ่านไม่ถูกต้อง');
-				} else {            
-					var strLink = "/flight/?username=" + user;
-					window.location.href = strLink;
+				} else {
+					if (data.customer[0].username = 'report'){
+						window.location.href = "/ReportListAllTicket";
+					}
+					else{
+						var strLink = "/flight/?username=" + user;
+						window.location.href = strLink;
+					}            
+					
 				}
 			},
 		});
