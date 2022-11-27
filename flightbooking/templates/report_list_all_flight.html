@@ -14,13 +14,17 @@
                 <a class="nav-link" href="/FlightManagement">Flight Management</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/ReportListAllTicket">Report List All Ticket</a>
+                <a class="nav-link" href="/ReportListAllFlight"> List All Flight</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/ReportListAllCustomer">Report List All Customer</a>
+                <a class="nav-link" href="/ListAllTicket"> List All Ticket</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ListAllCustomer">List All Customer</a>
             </li>
         </ul>
         </nav>
+        
     <table id='maintable' class='table'>
         <tr>
             <th>#</th>
@@ -28,16 +32,15 @@
             <th>{{ name }} </th>
             {% endfor %}
         </tr>
-    {% for lineitem in data %}
+    {% for list in data %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{ lineitem.ticket_id }}</td>
-            <td>{{ lineitem.flightid }}</td>
-            <td>{{ lineitem.flight_class }}</td>
-            <td>{{ lineitem.seat }}</td>
-            <td>{{ lineitem.username }}</td>
-            
-
+            <td>{{ list.flight_id }}</td>
+            <td>{{ list.departure }}</td>
+            <td>{{ list.destination }}</td>
+            <td>{{ list.gate }}</td>
+            <td>{{ list.boarding_time }}</td>      
+            <td>{{ list.boarding_date }}</td>        
     {% endfor %}
   
 </body>

@@ -23,6 +23,8 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
+def voice(request):
+    return render(request, 'voice.html')
 
 var3 =None
 def Flightview(request):
@@ -66,6 +68,11 @@ class CustomerDetail(View):
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
+        fields = '__all__'
+
+class FlightForm(forms.ModelForm):
+    class Meta:
+        model = Flight
         fields = '__all__'
 
 class CustomerForm(forms.ModelForm):
@@ -145,28 +152,129 @@ def reFormatDateMMDDYYYY(yyyymmdd):
         return  yyyymmdd[6:] + "-" + yyyymmdd[:2] + "-" + yyyymmdd[3:5]
 
 
-def ReportListAllTicket(request):
+def ListAllTicket(request):
+    return render(request, 'list_all_ticket.html')
+
+class TicketList(View):
+    def get(self, request):
+        ticket = list(Ticket.objects.all().values())
+        data = dict()
+        data['data'] = ticket
+        
+        return JsonResponse(data)
+
+
+def getTicket(request):
+    ticket_id = request.GET.get('ticket_id', '')
+    ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values())
+    data = dict()
+    data['ticket'] = ticket
+    
+    return render(request, 'list_all_ticket.html', data)
+
+class TicketGet(View):
+    def get(self, request, ticket_id):
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values())
+        data = dict()
+        data['ticket'] = ticket
+        print(data)
+        return JsonResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class TicketDelete(View):
+    def post(self, request):
+
+        ticket_id = request.POST['ticket_id']
+        ticket = Ticket.objects.get(ticket_id=ticket_id)
+        data = dict()
+        if ticket:
+            ticket.delete()
+            data['message'] = "Ticket Deleted!"
+        else:
+            data['message'] = "Error!"
+            return JsonResponse(data)
+
+        ticket = list(Ticket.objects.all().values())
+        data['ticket'] = ticket
+
+        return JsonResponse(data)
+
+def ListAllCustomer(request):
+    return render(request, 'list_all_customer.html')
+
+class CustomerList(View):
+    def get(self, request):
+        customers = list(Customer.objects.all().values('username','firstname','lastname','birthday','phonenumber'))
+        data = dict()
+        data['customers'] = customers
+        return JsonResponse(data)
+
+
+def getCustomer(request):
+    username = request.GET.get('username', '')
+    customers = list(Customer.objects.filter(username=username).values('username','firstname','lastname','birthday','phonenumber'))
+    data = dict()
+    data['data'] = customers
+
+    return render(request, 'list_all_customer.html', data)
+
+class CustomerGet(View):
+    def get(self, request, username):
+        customers = list(Customer.objects.filter(username=username).values('username','firstname','lastname','birthday','phonenumber'))
+        data = dict()
+        data['data'] = customers
+
+        return JsonResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CustomerDelete(View):
+    def post(self, request):
+
+        username = request.POST['username']
+        customer = Customer.objects.get(username=username)
+        data = dict()
+        if customer:
+            customer.delete()
+            data['message'] = "Customer Deleted!"
+        else:
+            data['message'] = "Error!"
+            return JsonResponse(data)
+
+        customers = list(Customer.objects.all().values('username','firstname','lastname','birthday','phonenumber'))
+        data['customers'] = customers
+
+        return JsonResponse(data)
+
+
+def ReportListAllFlight(request):
     dataReport = dict()
-    data = list(Ticket.objects.all())
-    columns = ('Ticket ID','Flight ID','Flight Class','Seat','Username')
+    data = list(Flight.objects.all())
+    columns = ('flight_id','departure','destination','gate','boarding_time','boarding_date')
     print(data)
     dataReport['column_name']= columns
     dataReport['data']=data
-    return render(request, 'report_list_all_ticket.html', dataReport)
-def ReportListAllCustomer(request):
-    dataReport = dict()
-    data = list(Customer.objects.all())
-    columns = ('Username','Firstname','Lastname','Birthday','Phonenumber')
-    print(data)
-    dataReport['column_name']= columns
-    dataReport['data']=data
-    return render(request, 'report_list_all_customer.html',dataReport)
-
-
+    return render(request, 'report_list_all_flight.html',dataReport)
 
 def FMindex(request):
     data = {}
     return render(request, 'flightmanahement.html', data)
+
+# @method_decorator(csrf_exempt, name='dispatch')
+# class Flightsave(View):
+    
+#     @transaction.atomic
+#     def post(self, request):
+#         print(request.POST)
+#         data = dict()
+#         form = FlightForm(request.POST)
+#         if form.is_valid():
+#             flight = form.save()
+#             print(model_to_dict(flight))
+#             data['flight'] = model_to_dict(flight)
+#         else:
+#             data['result'] = form.errors
+#         return JsonResponse(data)
+
 
 # class ProductList(View):
 #     def get(self, request):

@@ -1,0 +1,135 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cpe.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav mb-0 ">
+            <li class="nav-item">
+                <a class="nav-link" href="/FlightManagement">Flight Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ReportListAllFlight"> List All Flight</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ListAllTicket"> List All Ticket</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ListAllCustomer"> List All Customer</a>
+            </li>
+        </ul>
+    </nav>
+    <br />
+    <form id='form_get' action='/ListAllCustomer/get' method='GET'>
+        <label>Username</label>
+        <input type='text' name='username' value=''>
+        <input type='submit' value='GET'>
+    </form>
+
+    <button id='btnCustomerList'>List Customer </button>
+
+    <table id='CustomerList' class='table'>
+        <thead>
+            <tr>
+                <th class='col-1'>#</th>
+                <th class='col-2'>Username</th>
+                <th class='col-2'>Firstname</th>
+                <th class='col-3'>Lastname</th>
+                <th class='col-3'>Birthday</th>
+                <th class='col-3'>Phonenumber</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for list in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ list.username }}</td>
+                <td>{{ list.firstname }}</td>
+                <td>{{ list.lastname }}</td>
+                <td>{{ list.birthday }}</td>
+                <td>{{ list.phonenumber }}</td>
+                <td><input type='button' class='btnDelCustomer' value='Del'></td>
+            <tr>
+                {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            $('#btnCustomerList').click(function () {
+                console.log('btnCustomerList');
+                $.ajax({
+                    url: '/ListAllCustomer/list',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        let rows = '';
+                        var i = 1;
+                        data.customers.forEach(customer => {
+                            rows += `
+                                    <tr>
+                                        <td>${i++}</td>
+                                        <td>${customer.username}</td>
+                                        <td>${customer.firstname}</td>
+                                        <td>${customer.lastname}</td>
+                                        <td>${customer.birthday}</td>
+                                        <td>${customer.phonenumber}</td>
+                                        <td><input type='button' class='btnDelCustomer' value='Del'></td>
+                                    </tr>`;
+                        });
+                        $('#CustomerList > tbody').html(rows);
+                    },
+                });
+            });
+
+
+            $(document).on("click", ".btnDelCustomer", function () {
+
+                var username = $(this).parents('tr').find('td:nth-child(2)').html();
+                console.log(username);
+                var token = $('[name=csrfmiddlewaretoken]').val();
+                $.ajax({
+                    url: '/ListAllCustomer/delete',
+                    type: 'post',
+                    data: 'username=' + username,
+                    headers: { "X-CSRFToken": token },
+                    dataType: 'json',
+                    success: function (data) {
+                        let rows = '';
+                        var i = 1;
+                        data.customers.forEach(customer => {
+                            rows += `
+                                    <tr>
+                                        <td>${i++}</td>
+                                        <td>${customer.username}</td>
+                                        <td>${customer.firstname}</td>
+                                        <td>${customer.lastname}</td>
+                                        <td>${customer.birthday}</td>
+                                        <td>${customer.phonenumber}</td>
+                                        <td><input type='button' class='btnDelCustomer' value='Del'></td>
+                                    </tr>`;
+                        });
+                        $('#CustomerList > tbody').html(rows);
+                    },
+                });
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>

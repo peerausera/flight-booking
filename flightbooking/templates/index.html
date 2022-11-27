@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-
+	
 	<!-- Magnific Popup -->
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 
@@ -35,7 +35,9 @@
 
 	<!-- Modernizr JS -->
 	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
-	<!-- FOR IE9 below -->
+	
+	
+	<link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
 	</head>
 	<body>
@@ -45,7 +47,6 @@
 	<div id="page">
 
 	
-	<!-- <div class="page-inner"> -->
 	<nav class="gtco-nav" role="navigation">
 		<div class="gtco-container">
 			
@@ -53,27 +54,13 @@
 				<div class="col-sm-4 col-xs-12">
 				<div id="gtco-logo"><a href="/index/">Diamond Airline <em>.</em></a></div>
 				</div>
-				<!-- <div class="col-xs-8 text-right menu-1">
-				<ul>
-						<li><a href="destination.html">Destination</a></li>
-						<li class="has-dropdown">
-							<a href="#">Travel</a>
-							<ul class="dropdown">
-								<li><a href="#">Europe</a></li>
-								<li><a href="#">Asia</a></li>
-								<li><a href="#">America</a></li>
-								<li><a href="#">Canada</a></li>
-							</ul>
-						</li>
-						<li><a href="pricing.html">Pricing</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>	
-				</div> -->
 			</div>
 			
 		</div>
 	</nav>
 	
+	
+
 	<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(/static/images/img_bg_2.jpg)">
 		<div class="overlay"></div>
 		<div class="gtco-container">
@@ -94,12 +81,6 @@
 										<div class="tab-content-inner active" data-content="signup">
 											<h3>จองตั๋วเครื่องบิน</h3>
 											<form action="#">
-												<!-- <div class="row form-group">
-													<div class="col-md-12">
-														<label for="fullname">ชื่อ</label>
-														<input type="text" id="name" class="form-control">
-													</div>
-												</div> -->
 												<div class="row form-group">
 													<div class="col-md-12">
 														<label for="destination">ปลายทาง</label>
@@ -126,7 +107,7 @@
 
 												<div class="row form-group">
 													<div class="col-md-12">
-														<input type="button" id="btn-submit"class="btn btn-primary btn-block" value="ค้นหาเที่ยวบิน">
+														<input type="button" id="btn-submit" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" value="ค้นหาเที่ยวบิน">
 													</div>
 												</div>
 											</form>	
@@ -143,14 +124,21 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	</header>
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="container">
+			<div class="popup">
+			  <div class="popup-content">
+				<span class="close" data-dismiss="modal" >&times;</span>
+				<img src="{% static 'images/popup.png' %}">
+				<a id="btn-popup" class="popup-button">สำหรับผู้พิการทางสายตา</a>
+			  </div>  
+			</div>  
+		</div>
+	</div>
 	
-
-	<!-- </div> -->
-
-	<!-- <div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div> -->
 	
 	<!-- jQuery -->
 	<script src="{% static 'js/jquery.min.js' %}"></script>

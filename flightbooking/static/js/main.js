@@ -84,22 +84,6 @@
 	};
 
 
-	var burgerMenu = function() {
-
-		$('body').on('click', '.js-gtco-nav-toggle', function(event){
-			var $this = $(this);
-
-
-			if ( $('body').hasClass('overflow offcanvas') ) {
-				$('body').removeClass('overflow offcanvas');
-			} else {
-				$('body').addClass('overflow offcanvas');
-			}
-			$this.toggleClass('active');
-			event.preventDefault();
-
-		});
-	};
 
 
 
@@ -290,7 +274,6 @@
 		mobileMenuOutsideClick();
 		formTab();
 		offcanvasMenu();
-		burgerMenu();
 		contentWayPoint();
 		dropdown();
 		owlCarousel();
@@ -329,6 +312,13 @@
 		        });   
 			
 	});
+	$('#myModal').modal('toggle')
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			$('#myModal').modal('toggle')
+		}
+	  }
 
 }());
 

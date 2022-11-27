@@ -1,0 +1,72 @@
+
+
+.container {
+  display: flex;
+  -webkit-display: box;
+  -moz-display: box;
+  -ms-display: flexbox;
+  -webkit-display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  padding: 6%;
+  /* margin: 0; */
+}
+
+.popup {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 0.5rem 2rem 3rem 2rem; 
+  box-shadow: 0 10px 40px -14px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+.popup .popup-content  {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.popup .popup-title {
+  color: #32325d;
+  font-size: 1.8em;
+  line-height: 1.5em;
+  font-weight: 900;
+  margin-top: 0;
+}
+
+.popup .popup-button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 6px;
+  margin: 10px;
+  padding: 1em 3em;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  background-image: linear-gradient(to right, #FF4B2B 0%, #ff845e 50%, #FF416C 100%);
+  transition: 0.5s;
+}
+.popup .popup-button:hover {
+  background-position: right center;
+}
+
+.close {
+    color: rgb(20, 20, 20);
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
