@@ -77,7 +77,7 @@ $(document).ready(function () {
 	});
 
 	$('#btnlogin').click(function () {
-			
+		
 		var user = $('#user').val().trim();
 		if (user == '') {
 			alert('กรุณาระบุชื่อผู้ใช้');
@@ -104,15 +104,9 @@ $(document).ready(function () {
 				} 
 				else if (pwd != pass){
 					alert('รหัสผ่านไม่ถูกต้อง');
-				} else {
-					if (data.customer[0].username == 'report'){
-						window.location.href = "/ReportListAllTicket";
-					}
-					else{
-						var strLink = "/flight/?username=" + user;
-						window.location.href = strLink;
-					}            
-					
+				} else {            
+					var strLink = "/flight/?username=" + user;
+					window.location.href = strLink
 				}
 			},
 		});
