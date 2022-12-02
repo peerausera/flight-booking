@@ -312,13 +312,7 @@
 		        });   
 			
 	});
-	$('#myModal').modal('toggle')
 
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			$('#myModal').modal('toggle')
-		}
-	  }
 
 }());
 

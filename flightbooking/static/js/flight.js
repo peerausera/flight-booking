@@ -1,12 +1,7 @@
-// (function() {
-//     var scrt_var = "Quagmire";
-//     var strLink = "/ticket/?username=" + scrt_var;
-//     document.getElementById("btn-select").setAttribute("href",strLink);
-// })();
-function button() {
+function button(elem) {
     var formData = {
-        flightid: $("#flightid").val(),
-        flight_class: $("#flightclass").val(),
+        flightid: elem.getAttribute("data-flight-id"),
+        flight_class: elem.getAttribute("data-flightclass"),
       };
       var token = $('[name=csrfmiddlewaretoken]').val();
       console.log('click')
@@ -28,11 +23,7 @@ function button() {
             }
         },
     });
+    
   }
-// $(document).ready(function () {
-// 	$('#btn-select').click(function () {
-		
 
-// 	});
 
-// });

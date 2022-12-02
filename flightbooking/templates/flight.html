@@ -43,7 +43,7 @@
 
     <body>
 
-        <div class="gtco-loader"></div>
+        <!-- <div class="gtco-loader"></div> -->
 
         <div id="page">
 
@@ -91,12 +91,10 @@
                         <div class="card">
                             <i class="fa fa-plane"></i>
                             <h2 >{{ list.flight_id }}</h2>
-                            <input type="hidden" id="flightid" name="variable" value="{{ list.flight_id }}">
                             <p>วันเดินทาง: {{ list.boarding_date }} - {{ list.boarding_time }}</p>
                             <p >{{ list1.flight_class }}</p>
-                            <input type="hidden" id="flightclass" name="variable" value="{{ list1.flight_class }}">
                             <p>ราคา {{ list1.price }}</p>
-                            <a id="btn-select" class="button" onclick="button()">เลือกเที่ยวบิน</a>
+                            <a id="btn-select" class="button" onclick="button(this)" data-flight-id ="{{ list.flight_id }}" data-flightclass="{{ list1.flight_class }}" >เลือกเที่ยวบิน</a>
                             <hr>
                         </div>
                     
