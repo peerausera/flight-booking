@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.forms.models import model_to_dict
 from django.db.models import Max
 from django.db import transaction
-import decimal
+from gTTS.templatetags.gTTS import say
 from django.utils.timezone import is_aware
 from .models import *
 import json
@@ -128,7 +128,7 @@ class CreateTicket(View):
         else:
             next_ticket_id = 'TK100000'
         print(next_ticket_id)
-        user=var3() 
+        user=var3()  
         Flightid = request.POST.get('flightid')
         Flightclass = request.POST.get('flight_class')
         dict_data = dict()
@@ -149,10 +149,30 @@ class CreateTicket(View):
         return JsonResponse(data)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class voicesearch(View):
+    
+    @transaction.atomic
+    def post(self, request):
+        destination = request.POST['destination']
+        boarding_date = request.POST['date']
+        # boarding_date = reFormatDateMMDDYYYY(date)
+        flight = list(Flight.objects.filter(destination = destination)
+        .filter(boarding_date = boarding_date)
+        .values('flight_id'))
+
+        data = dict()
+        data['flight'] = flight
+        obj = say(language='en-us', text="Text From Views")
+        return render(request, 'voice-flight.html', {'obj':obj})
+        # return JsonResponse(data)
+
 def reFormatDateMMDDYYYY(yyyymmdd):
         if (yyyymmdd == ''):
             return ''
         return  yyyymmdd[6:] + "-" + yyyymmdd[:2] + "-" + yyyymmdd[3:5]
+
+
 
 
 

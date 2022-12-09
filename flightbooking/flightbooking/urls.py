@@ -29,5 +29,7 @@ urlpatterns = [
     path('flight/createticket/', views.CreateTicket.as_view(), name='createticket'),
     path('ticket/', views.ticket),
     path('ticket/search/', views.SearchTicket.as_view(), name='searchticket'),
-    
+    path('voice/', views.voice),
+    path('voice/search/', views.voicesearch.as_view(), name='voicesearch'),
+
 ]

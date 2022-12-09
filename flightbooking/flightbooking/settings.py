@@ -31,10 +31,11 @@ ALLOWED_HOSTS = [
   '10.0.0.105',
   'project.peeranat-home.online']
 
-
+CSRF_TRUSTED_ORIGINS = ['https://project.peeranat-home.online']
 # Application definition
 
 INSTALLED_APPS = [
+    'gTTS',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',

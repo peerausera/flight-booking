@@ -1,13 +1,85 @@
 {% load static %}
+{% load gTTS %}
 <!DOCTYPE html>
-<html lang="th" >
+<html lang="th">
+
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'css/voice.css' %}">
 </head>
-<body>
 
-    
-<script src="{% static 'js/test.js' %}"></script>
+<body>
+  <!-- <audio controls autoplay hidden>
+    <source
+      src="{% say 'th' 'ยินดีต้อนรับสู่ระบบจองตั๋วเครื่องบิน diamond airline ด้วยเสียง ..... กรุณาเลือกจุดหมายปลายทาง ..... สีแดง Tokyo ..... สีส้มปักกิ่ง  ..... สีเหลือง Seoul ..... สีเขียว Singapore ..... สีฟ้า Maldives ..... สีคราม London ..... สีน้ำเงิน New York ..... สีม่วง Los Angeles ..... สีชมพูฮานอย ....... หากต้องการติดต่อพนักงานโดยตรง สามารถโทรศัพท์หมายเลข .. 0123456789' %}">
+  </audio> -->
+  
+  <div class="card" style="--background:#e3342f; --text:white;">
+    <button class="container" id="1">
+      <h1>Tokyo</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:#f6993f; --text:white;">
+    <button class="container" id="2">
+      <h1>Beijing</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:#ffed4a; --text:white;">
+    <button class="container" id="3">
+      <h1>Seoul</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:#38c172; --text:white;">
+    <button class="container" id="4">
+      <h1>Singapore</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:	#00BFFF; --text:white;">
+    <button class="container" id="5">
+      <h1>Maldives</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:	#4B0082; --text:white;">
+    <button class="container" id="6">
+      <h1>London</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:	#1F51FF; --text:white;">
+    <button class="container" id="7">
+      <h1>New York</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:#9561e2; --text:white;">
+    <button class="container" id="8">
+      <h1>Los Angeles</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:#f66d9b; --text:white;">
+    <button class="container" id="9">
+      <h1>Hanoi</h1>
+    </button>
+  </div>
+  <div class="card" style="--background:#ffffff; --text:white;">
+    <div class="container" id="10">
+      <input type="date" id="date" name="date" data-date-format="DD MMMM YYYY">
+      <button type="button" class="submit" id="btn-submit">ตกลง</button>
+    </div>
+  </div>
+  <audio id="audio1" src="{% say 'th' 'เลือกเดินทางไป tokyo ...โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio2" src="{% say 'th' 'เลือกเดินทางไปปักกิ่ง ...โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio3" src="{% say 'th' 'เลือกเดินทางไป Seoul ...โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio4" src="{% say 'th' 'เลือกเดินทางไป Singapore ... โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio5" src="{% say 'th' 'เลือกเดินทางไป Maldives...โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio6" src="{% say 'th' 'เลือกเดินทางไป London ... โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio7" src="{% say 'th' 'เลือกเดินทางไป New York ... โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio8" src="{% say 'th' 'เลือกเดินทางไป Los Angeles ... โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวัน และปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio9" src="{% say 'th' 'เลือกเดินทางไปฮานอย ... โปรดเลือกวันที่เดินทางในกล่องสีขาวด้านขวาล่างโดยกดที่ตัวแรกแล้วพิมพ์เดือน ตามด้วยวันและปี ค.ศ. จากนั้นกดปุ่มตกลงสีแดง' %}"> </audio>
+  <audio id="audio10" src="{% say 'th' 'กรุณาระบุวันที่' %}"> </audio>
+  <audio id="audio11" src="{% say 'th' 'กรุณาเลือกปลายทาง' %}"> </audio>
+  <!-- jQuery -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/test.js' %}"></script>
 
 </body>
+
 </html>

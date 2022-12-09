@@ -1,4 +1,5 @@
 {% load static %}
+{% load gTTS %}
 <!DOCTYPE HTML>
 
 <html>
@@ -66,8 +67,6 @@
 		<div class="gtco-container">
 			<div class="row">
 				<div class="col-md-12 col-md-offset-0 text-left">
-					
-
 					<div class="row row-mt-15em">
 						<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
 							<h1>Diamond Airline</h1>
@@ -124,7 +123,20 @@
 				</div>
 			</div>
 		</div>
-		
+		<audio controls autoplay hidden>
+			<source src="{% say 'th' 'สำหรับผู้พิการทางสายตากดปุ่มสีแดงกลางจอ' %}" >
+		  </audio>
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="container">
+				<div class="popup">
+				  <div class="popup-content">
+					<span class="close" data-dismiss="modal" >&times;</span>
+					<img src="{% static 'images/popup.png' %}">
+					<a id="btn-popup" class="popup-button">สำหรับผู้พิการทางสายตา</a>
+				  </div>  
+				</div>  
+			</div>
+		</div>
 		
 	</header>
 	

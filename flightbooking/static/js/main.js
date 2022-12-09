@@ -312,7 +312,18 @@
 		        });   
 			
 	});
+	$('#myModal').modal('toggle')
 
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			$('#myModal').modal('toggle')
+		}
+	  }
+	  $('#btn-popup').click(function () {
+		window.location.href = "/voice"
+			
+	});
+	  
 
 }());
 
