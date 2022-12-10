@@ -1,5 +1,7 @@
 ;(function () {
-	
+
+	let voice = false; 			// Voice varible for enable disabled mode
+
 	'use strict';
 
 	var mobileMenuOutsideClick = function() {
@@ -284,20 +286,23 @@
 		parallax();
 	});
 
-
+	// If submit button press
 	$('#btn-submit').click(function () {
+		// Create form
 		var formData = {
 			destination: $("#destination").val(),
 			date_start:  $("#date-start").val(),
 			
 		  };
+		// Check if date not select
 		var date = $('#date-start').val().trim();
 		if (date == '') {
 			alert('กรุณาระบุวันที่');
 			$('#date-start').focus();
 			return false;
 		}
-		console.log(formData)                  
+        
+		//  Ajax post
 		var token = $('[name=csrfmiddlewaretoken]').val();
 		        $.ajax({
 		            url:  '/ticket/search/',
@@ -306,23 +311,35 @@
 		            headers: { "X-CSRFToken": token },
 		            dataType:  'json',
 		            success: function  (data) {
-		                var strLink = "/login" ;
-						window.location.href = strLink;
+						// If disabled mode is on send status to login page
+						if (voice == true){
+							window.location.href = "/login/?disabled=true";				
+						}
+						else{
+							window.location.href = "/login/?disabled=false";
+						}
+		                
 		            },
 		        });   
 			
 	});
+
+	// Close modal 
 	$('#myModal').modal('toggle')
 
+	// Close modal if click any where not in modal
 	window.onclick = function(event) {
 		if (event.target == modal) {
 			$('#myModal').modal('toggle')
+			  
 		}
 	  }
+	  // if press popup button enable disabled mode
 	  $('#btn-popup').click(function () {
-		window.location.href = "/voice"
-			
-	});
+		$("#audio1")[0].play(); 				// Play audio
+		voice = true;						
+		$('#myModal').modal('toggle')			// Close modal
+	}); 
 	  
 
 }());

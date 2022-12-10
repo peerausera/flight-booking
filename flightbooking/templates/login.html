@@ -1,84 +1,101 @@
 {% load static %}
+{% load gTTS %}
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
-        <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="{% static 'js/login_script.js' %}"></script>
-        
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon Icon -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <!-- stylesheet -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+    <!-- set font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
 
-    </head>
 
-    <body>
-        <div class="container" id="container">
-            <div class="form-container sign-up-container">
-                <form id='form_signup'>
-                    <h1>สร้างบัญชี</h1>
-                    <input type="text" id="username" placeholder="ชื่อผู้ใช้" />
-                    <input type="password" id="password" placeholder="รหัสผ่าน" />
-                    <input type="text" id="firstname" placeholder="ชื่อจริง" />
-                    <input type="text" id="lastname" placeholder="ชื่อนามสกุล" />
-                    <input type="text" id="phonenumber" placeholder="เบอร์โทรศัพท์" />
-                    <label for="birthday">
-                        วัน/เดือน/ปี เกิด
-                        <input type="date" id="birthday" name="birthday">
-                    </label>
+<body>
+    <!-- get data form view.py to hiden input -->
+    <input type="hidden" id="disabled" value="{{ disabled }}"> </input>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <!-- sign up  -->
+            <form id='form_signup'>
+                <h1>สร้างบัญชี</h1>
+                <input type="text" id="username" placeholder="ชื่อผู้ใช้" />
+                <input type="password" id="password" placeholder="รหัสผ่าน" />
+                <input type="text" id="passport" placeholder="หมายเลขพาสปอร์ต" />
+                <input type="text" id="firstname" placeholder="ชื่อจริง" />
+                <input type="text" id="lastname" placeholder="ชื่อนามสกุล" />
+                <input type="text" id="phonenumber" placeholder="เบอร์โทรศัพท์" />
+                <label for="birthday">
+                    วัน/เดือน/ปี เกิด
+                    <input type="date" id="birthday" name="birthday">
+                </label>
                 </br>
-                    
-                    <button type="button" id="btnsignup">สร้างบัญชี</button>
-                </form>
-            </div>
-            <div class="form-container sign-in-container">
-                <form id='form_login'>
-                    <h1>ลงชื่อเข้าใช้</h1>
-                    <input type="text" id="user" placeholder="ชื่อผู้ใช้" />
-                    <input type="password" id="pwd" placeholder="รหัสผ่าน" />
-                    <!-- <a href="#">ลืมรหัสผ่านใช่ไหม?</a> -->
-                    <button type="button" id="btnlogin">ลงชื่อเข้าใช้</button>
-                </form>
-            </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-left">
-                        <h1>ยินดีต้อนรับ</h1>
-                        <p>มีบัญชีอยู่แล้วลงชื่อเข้าใช้ได้เลย</p>
-                        <button class="ghost" id="signIn">ลงชื่อเข้าใช้</button>
-                    </div>
-                    <div class="overlay-panel overlay-right">
-                        <h1>ครั้งแรกใช่ไหม</h1>
-                        <p>สร้างบัญชีสำหรับใช้งาน</p>
-                        <button class="ghost" id="signUp">สมัครเลย</button>
-                    </div>
+
+                <button type="button" id="btnsignup">สร้างบัญชี</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <!-- login -->
+            <form id='form_login'>
+                <h1>ลงชื่อเข้าใช้</h1>
+                <input type="text" id="user" placeholder="ชื่อผู้ใช้" />
+                <input type="password" id="pwd" placeholder="รหัสผ่าน" />
+                <button type="button" id="btnlogin">ลงชื่อเข้าใช้</button>
+            </form>
+        </div>
+        <!-- overlay -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>ยินดีต้อนรับ</h1>
+                    <p>มีบัญชีอยู่แล้วลงชื่อเข้าใช้ได้เลย</p>
+                    <button class="ghost" id="signIn">ลงชื่อเข้าใช้</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>ครั้งแรกใช่ไหม</h1>
+                    <p>สร้างบัญชีสำหรับใช้งาน</p>
+                    <button class="ghost" id="signUp">สมัครเลย</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        
-        <!-- jQuery Easing -->
-        <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
-        <!-- Bootstrap -->
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <!-- Waypoints -->
-        <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-        <!-- Carousel -->
-        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-        <!-- countTo -->
-        <script src="{% static 'js/jquery.countTo.js' %}"></script>
+    <!-- autoplay text to speech -->
+    <audio controls autoplay hidden>
+        <source src="{{obj}}">
+    </audio>
 
-        <!-- Stellar Parallax -->
-        <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <!-- audio for javascript -->
+    <audio id="audio1"
+        src="{% say 'th' 'กรอกชื่อผู้ใช้ . รหัสผ่าน . หมายเลขพาสปอร์ต  . ชื่อ . นามสกุล  .เบอร์โทรศัพท์  . และวันเกิด ... จากนั้นกดปุ่มสร้างบัญชีสีแดง' %}">
+    </audio>
 
-        <!-- Magnific Popup -->
-        <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-        <script src="{% static 'js/magnific-popup-options.js' %}"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Waypoints -->
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <!-- Carousel -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- countTo -->
+    <script src="{% static 'js/jquery.countTo.js' %}"></script>
+    <!-- Stellar Parallax -->
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <!-- Magnific Popup -->
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/magnific-popup-options.js' %}"></script>
+    <!-- Datepicker -->
+    <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
 
-        <!-- Datepicker -->
-        <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
-
-    </body>
+    <!-- Login Script -->
+    <script src="{% static 'js/login_script.js' %}"></script>
+</body>
 
 </html>

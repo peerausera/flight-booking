@@ -4,6 +4,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Favicon Icon -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <!-- stylesheet -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/ticket_style.css' %}">
 
@@ -12,50 +15,57 @@
 <body>
 
     <h1 class="warning">กรุณาจับภาพหน้าจอนี้ไว้เพื่อเป็นหลักฐานในการขึ้นเครื่องบิน</h1>
+    <!-- for loop to get data from view.py -->
     {% for list in ticket %}
-        <div class="container">
-            <div class="ticket basic"><i class="fa fa-barcode" aria-hidden="true"> </i>
-                <div class="text">
-                    <p>Passenger Name</p>
-                    <h3 id="name"> {{ list.username }}</h3>
-                    <p>Class</p>
-                    <h3 id="flight_class">{{ list.flight_class }}</h3>
-                    <div class="seat">
-                        <p>Seat</p>
-                        <h1 id="seat">{{ list.seat }}</h1>
-                    </div>
-                    <div class="flight">
-                        <p>Flight</p>
-                        <h1 id="flight_id">{{ list.flightid }}</h1>
-                    </div>
+    <div class="container">
+        <!-- left side ticket  -->
+        <div class="ticket basic"><i class="fa fa-barcode" aria-hidden="true"> </i>
+            <div class="text">
+                <p>Passenger Name</p>
+                <h3 id="name"> {{ list.username }}</h3>
+                <p>Class</p>
+                <h3 id="flight_class">{{ list.flight_class }}</h3>
+                <div class="seat">
+                    <p>Seat</p>
+                    <h1 id="seat">{{ list.seat }}</h1>
                 </div>
-            </div>
-            <div class="ticket airline">
-                <div class="item1">
-                    <div class="from">
-                        <p>from</p>
-                        <h2 id="departure">{{ list.flightid__departure }}</h2>
-                    </div><i class="fa fa-plane"></i>
-                    <div class="to">
-                        <p>to</p>
-                        <h2 id="destination">{{ list.flightid__destination }}</h2>
-                    </div>
-                </div>
-                <div class="item2">
-                    <div class="gate">
-                        <p>Gate</p>
-                        <h1 id="gate">{{ list.flightid__gate }}</h1>
-                    </div>
-                    <div class="time">
-                        <p>Boarding Time</p>
-                        <h1 id="b_time">{{ list.flightid__boarding_time }}</h1>
-                    </div>
+                <div class="flight">
+                    <p>Flight</p>
+                    <h1 id="flight_id">{{ list.flightid }}</h1>
                 </div>
             </div>
         </div>
-        {% endfor %}
-        
-        
+        <!-- right side ticket -->
+        <div class="ticket airline">
+            <div class="item1">
+                <div class="from">
+                    <p>from</p>
+                    <h2 id="departure">{{ list.flightid__departure }}</h2>
+                </div><i class="fa fa-plane"></i>
+                <div class="to">
+                    <p>to</p>
+                    <h2 id="destination">{{ list.flightid__destination }}</h2>
+                </div>
+            </div>
+            <div class="item2">
+                <div class="gate">
+                    <p>Gate</p>
+                    <h1 id="gate">{{ list.flightid__gate }}</h1>
+                </div>
+                <div class="time">
+                    <p>Boarding Time</p>
+                    <h1 id="b_time">{{ list.flightid__boarding_time }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- autoplay text to speech  -->
+    <audio controls autoplay hidden>
+        <source src="{{obj}}">
+    </audio>
+
 </body>
 
 </html>

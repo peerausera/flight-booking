@@ -3,140 +3,122 @@
 
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Diamond Airline &mdash; บริการด้วยหัวใจ</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Diamond Airline &mdash; บริการด้วยหัวใจ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <!-- Set Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <!-- Themify Icons-->
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- flight style  -->
+    <link rel="stylesheet" href="{% static 'css/flight.css' %}">
 
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+</head>
 
-        <!-- Animate.css -->
-        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
-        <!-- Icomoon Icon Fonts-->
-        <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
-        <!-- Themify Icons-->
-        <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
-        <!-- Bootstrap  -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+<body>
+    <!-- page loader -->
+    <div class="gtco-loader"></div>
+    <div id="page">
 
-        <!-- Magnific Popup -->
-        <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+        <nav class="gtco-nav" role="navigation">
+            <div class="gtco-container">
 
-
-        <!-- Owl Carousel  -->
-        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-
-        <!-- Theme style  -->
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-        <!-- flight style  -->
-        <link rel="stylesheet" href="{% static 'css/flight.css' %}">
-
-        <!-- Modernizr JS -->
-        <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
-        <!-- FOR IE9 below -->
-
-    </head>
-
-    <body>
-
-        <!-- <div class="gtco-loader"></div> -->
-
-        <div id="page">
-
-            <nav class="gtco-nav" role="navigation">
-                <div class="gtco-container">
-
-                    <div class="row">
-                        <div class="col-sm-4 col-xs-12">
-                            <div id="gtco-logo"><a href="/index ">Diamond Airline <em>.</em></a></div>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div id="gtco-logo"><a href="/index ">Diamond Airline <em>.</em></a></div>
                     </div>
-
                 </div>
-            </nav>
 
-            <header id="gtco-header" class="gtco-cover gtco-cover-xs" role="banner"
-                style="background-image: url(/static/images/img_6.jpg)">
-                <div class="overlay"></div>
-                <div class="gtco-container">
-                    <div class="row">
-                        <div class="col-md-12 col-md-offset-2 text-center">
-                            <div class="row row-mt-1em">
-
-                                <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
-                                    <h1>เลือกเที่ยวบิน</h1>
-                                </div>
-
+            </div>
+        </nav>
+        <!-- banner -->
+        <header id="gtco-header" class="gtco-cover gtco-cover-xs" role="banner"
+            style="background-image: url(/static/images/img_6.jpg)">
+            <div class="overlay"></div>
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2 text-center">
+                        <div class="row row-mt-1em">
+                            <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+                                <h1>เลือกเที่ยวบิน</h1>
                             </div>
-
                         </div>
                     </div>
-                </div>
-            </header>
-
-            <div class="gtco-section">
-                <div class="gtco-container">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-                            <h2 id="fdestination">เที่ยวบินไป {{ destination }}</h2>
-                        </div>
-                    </div>
-                    {% for list in flight %}
-                    {% for list1 in flight_class %}
-                    <div class="row">
-                        <div class="card">
-                            <i class="fa fa-plane"></i>
-                            <h2 >{{ list.flight_id }}</h2>
-                            <p>วันเดินทาง: {{ list.boarding_date }} - {{ list.boarding_time }}</p>
-                            <p >{{ list1.flight_class }}</p>
-                            <p>ราคา {{ list1.price }}</p>
-                            <a id="btn-select" class="button" onclick="button(this)" data-flight-id ="{{ list.flight_id }}" data-flightclass="{{ list1.flight_class }}" >เลือกเที่ยวบิน</a>
-                            <hr>
-                        </div>
-                    
-                        
-                        
-                        
-
-                    </div>
-                    {% endfor %}
-                    {% endfor %}
                 </div>
             </div>
-
-
-
+        </header>
+        <!-- destination -->
+        <div class="gtco-section">
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+                        <h2 id="fdestination">เที่ยวบินไป {{ destination }}</h2>
+                    </div>
+                </div>
+                <!-- for loop to get data from view.py -->
+                {% for list in flight %}
+                {% for list1 in flight_class %}
+                <div class="row">
+                    <div class="card">
+                        <i class="fa fa-plane"></i>
+                        <h2>{{ list.flight_id }}</h2>
+                        <p>วันเดินทาง: {{ list.boarding_date }} - {{ list.boarding_time }}</p>
+                        <p>{{ list1.flight_class }}</p>
+                        <p>ราคา {{ list1.price }}</p>
+                        <!-- select flight -->
+                        <a id="btn-select" class="button" onclick="button(this)" data-flight-id="{{ list.flight_id }}"
+                            data-flightclass="{{ list1.flight_class }}">เลือกเที่ยวบิน</a>
+                        <hr>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endfor %}
+            </div>
         </div>
+    </div>
+    <!-- autoplay text to speech  -->
+    <audio controls autoplay hidden>
+        <source src="{{obj}}">
+    </audio>
 
-        
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- jQuery Easing -->
+    <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Waypoints -->
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <!-- Carousel -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- countTo -->
+    <script src="{% static 'js/jquery.countTo.js' %}"></script>
+    <!-- Stellar Parallax -->
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <!-- Modernizr JS -->
+    <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+    <!-- Main -->
+    <script src="{% static 'js/flight.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
-        <!-- jQuery -->
-        <script src="{% static 'js/jquery.min.js' %}"></script>
-        <!-- jQuery Easing -->
-        <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
-        <!-- Bootstrap -->
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <!-- Waypoints -->
-        <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-        <!-- Carousel -->
-        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-        <!-- countTo -->
-        <script src="{% static 'js/jquery.countTo.js' %}"></script>
-
-        <!-- Stellar Parallax -->
-        <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-
-
-        <!-- Main -->
-        <script src="{% static 'js/flight.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-        
-
-
-    </body>
+</body>
 
 </html>
